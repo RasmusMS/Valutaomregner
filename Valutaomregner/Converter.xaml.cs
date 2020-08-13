@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,11 +14,11 @@ using System.Windows.Shapes;
 namespace Valutaomregner
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Converter.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class Converter : Page
     {
-        public MainWindow()
+        public Converter()
         {
             InitializeComponent();
         }
