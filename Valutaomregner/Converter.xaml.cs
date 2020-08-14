@@ -22,5 +22,16 @@ namespace Valutaomregner
         {
             InitializeComponent();
         }
+
+        public string fromCurrency;
+        public string toCurrency;
+        int amount;
+
+        private void btn1_Click(object sender, RoutedEventArgs e)
+        {
+            fromCurrency = ((ComboBoxItem)Combo1.SelectedItem).Content.ToString();
+            toCurrency = ((ComboBoxItem)Combo2.SelectedItem).Content.ToString();
+            float exchangeRate = CurrencyConverter.GetExchangeRate(fromCurrency, toCurrency, amount);
+        }
     }
 }
