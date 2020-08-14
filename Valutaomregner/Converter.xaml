@@ -33,5 +33,6 @@
             <ComboBoxItem>CHF</ComboBoxItem>
             <ComboBoxItem>JPY</ComboBoxItem>
         </ComboBox>
+        <Label Name="lbl1" Content="hi" HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="148" Margin="0,104,0,0"/>
     </Grid>
 </Page>
