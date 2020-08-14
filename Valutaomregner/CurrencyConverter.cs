@@ -7,9 +7,8 @@ namespace Valutaomregner
 {
     public class CurrencyConverter
     {
-        /// <summary>
+
         /// Gets all available currency tags
-        /// </summary>
         public static string[] GetCurrencyTags()
         {
 
@@ -31,7 +30,7 @@ namespace Valutaomregner
 
             try
             {
-                // Create with currency parameter, a valid RSS url to ECB euro exchange rate feed
+                // Create with currency parameter, a valid RSS url to Nationalbanken
                 string rssUrl = string.Concat("https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRateRSS?lang=da&iso=", currency.ToLower());
 
                 // Create & Load New Xml Document
@@ -78,9 +77,8 @@ namespace Valutaomregner
             }
         }
 
-        /// <summary>
+
         /// Get The Exchange Rate Between 2 Currencies
-        /// </summary>
         public static float GetExchangeRate(string from, string to, float amount = 1)
         {
             // If currency's are empty abort

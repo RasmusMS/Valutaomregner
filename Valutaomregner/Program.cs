@@ -14,28 +14,21 @@ namespace Valutaomregner
             int amount = 1;
 
             //
-            // STEP 1 : Print all avaiable currencies on screen
+            // STEP 1 : Add all availabe currencies to the ComboBox
             //
 
             // Get all available currency tags
             string[] availableCurrency = CurrencyConverter.GetCurrencyTags();
-            // Print currency tags comma seperated
             foreach (string item in availableCurrency)
             {
-
+                ComboBox1.items.Add(item);
             }
 
             //
-            // STEP 2 : Allow the User to input the currency rates
+            // STEP 2 : Register which currencies the user want to convert from and to
             //
 
-            Console.WriteLine("Insert Currency you want to convert FROM");
-            fromCurrency = Console.ReadLine();
-            Console.WriteLine("\n");
 
-            Console.WriteLine("Insert Currency you want to convert TO");
-            toCurrency = Console.ReadLine();
-            Console.WriteLine("\n");
 
             //
             // STEP 3 : Calculate and display the currency exchange rate
@@ -44,10 +37,9 @@ namespace Valutaomregner
             // Calls a method to get the exchange rate between 2 currencies
             float exchangeRate = CurrencyConverter.GetExchangeRate(fromCurrency, toCurrency, amount);
             // Print result of currency exchange
-            Console.WriteLine("FROM " + amount + " " + fromCurrency.ToUpper() + " TO " + toCurrency.ToUpper() + " = " + exchangeRate);
+            
 
-            // Wait for key press to close console window
-            Console.ReadLine();
+
         }
     }
 }
