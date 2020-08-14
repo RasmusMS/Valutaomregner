@@ -10,9 +10,28 @@
 
     <Grid>
         <Label HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="163" Height="37" Content="Valutaomregner" FontSize="24" FontFamily="Garamond"/>
-        <TextBox HorizontalAlignment="Left" Margin="150,250,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
         <Label Content="Fra:" HorizontalAlignment="Left" Margin="150,224,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="530,250,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
         <Label Content="Til:" HorizontalAlignment="Left" Margin="530,225,0,0" VerticalAlignment="Top"/>
+        <Button Content="Convert" HorizontalAlignment="Center" Height="30" Margin="0,292,0,0" VerticalAlignment="Top" Width="115"/>
+        <ComboBox HorizontalAlignment="Left" Height="25" Margin="150,250,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem IsSelected="True">DKK</ComboBoxItem>
+            <ComboBoxItem>EUR</ComboBoxItem>
+            <ComboBoxItem>USD</ComboBoxItem>
+            <ComboBoxItem>GBP</ComboBoxItem>
+            <ComboBoxItem>SEK</ComboBoxItem>
+            <ComboBoxItem>NOK</ComboBoxItem>
+            <ComboBoxItem>CHF</ComboBoxItem>
+            <ComboBoxItem>JPY</ComboBoxItem>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" Height="25" Margin="530,250,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>DKK</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">EUR</ComboBoxItem>
+            <ComboBoxItem>USD</ComboBoxItem>
+            <ComboBoxItem>GBP</ComboBoxItem>
+            <ComboBoxItem>SEK</ComboBoxItem>
+            <ComboBoxItem>NOK</ComboBoxItem>
+            <ComboBoxItem>CHF</ComboBoxItem>
+            <ComboBoxItem>JPY</ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Page>
