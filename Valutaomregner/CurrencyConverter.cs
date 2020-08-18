@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace Valutaomregner
 {
@@ -21,7 +22,7 @@ namespace Valutaomregner
         /// <summary>
         /// Get currency exchange rate in euro's 
         /// </summary>
-        public static float GetCurrencyRateInEuro(string currency)
+        /*public static float GetCurrencyRateInEuro(string currency)
         {
             if (currency.ToLower() == "")
                 throw new ArgumentException("Invalid Argument! currency parameter cannot be empty!");
@@ -31,7 +32,7 @@ namespace Valutaomregner
             try
             {
                 // Create with currency parameter, a valid RSS url to Nationalbanken
-                string rssUrl = string.Concat("https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRateRSS?lang=da&iso=", currency.ToLower());
+                string xmlUrl = string.Concat("https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da", currency.ToLower());
 
                 // Create & Load New Xml Document
                 System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
@@ -62,7 +63,7 @@ namespace Valutaomregner
 
                         return exchangeRate;
                     }
-                    catch { }
+                    catch { return 101; }
                 }
 
                 // currency not parsed!! 
@@ -82,12 +83,16 @@ namespace Valutaomregner
         public static float GetExchangeRate(string from, string to, float amount = 1)
         {
             // If currency's are empty abort
-            if (from == null || to == null)
+            if (from == null || to == null) 
+            {
                 return 0;
+            }
 
             // Convert Euro to Euro
             if (from.ToLower() == "eur" && to.ToLower() == "eur")
+            {
                 return amount;
+            }
 
             try
             {
@@ -110,7 +115,28 @@ namespace Valutaomregner
                     return (amount * toRate) / fromRate;
                 }
             }
-            catch { return 0; }
+            catch { return GetCurrencyRateInEuro(to); }
+        }*/
+
+        public static float CurrencyRate(string currency)
+        {
+
+        }
+
+        public static float ConvertValuta(string from, string to, float amount)
+        {
+            // If input is missing
+            if (from == null || to == null)
+            {
+                return 0;
+            }
+
+            // If currency is being converted to same currency
+            if (from.ToLower() == to.ToLower())
+            {
+                return amount;
+            }
+
         }
     }
 }

@@ -10,8 +10,8 @@
 
     <Grid>
         <Label HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="163" Height="37" Content="Valutaomregner" FontSize="24" FontFamily="Garamond"/>
-        <Label Content="Fra:" HorizontalAlignment="Left" Margin="150,224,0,0" VerticalAlignment="Top"/>
-        <Label Content="Til:" HorizontalAlignment="Left" Margin="530,225,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fra:" HorizontalAlignment="Left" Margin="150,184,0,0" VerticalAlignment="Top"/>
+        <Label Content="Til:" HorizontalAlignment="Left" Margin="530,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.057,-2.968"/>
         <Button x:Name="btn1" Click="btn1_Click" Content="Convert" HorizontalAlignment="Center" Height="30" Margin="0,292,0,0" VerticalAlignment="Top" Width="115"/>
         <ComboBox x:Name="Combo1" HorizontalAlignment="Left" Height="25" Margin="150,250,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem IsSelected="True">DKK</ComboBoxItem>
@@ -33,6 +33,7 @@
             <ComboBoxItem>CHF</ComboBoxItem>
             <ComboBoxItem>JPY</ComboBoxItem>
         </ComboBox>
-        <Label Name="lbl1" Content="hi" HorizontalAlignment="Center" Height="31" VerticalAlignment="Top" Width="148" Margin="0,104,0,0"/>
+        <Label Name="lbl1" Content="Beløb" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="120" Margin="530,215,0,0"/>
+        <TextBox x:Name="txt1" HorizontalAlignment="Left" Margin="150,215,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>
     </Grid>
 </Page>
