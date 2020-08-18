@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Windows;
 
 namespace Valutaomregner
 {
@@ -112,23 +113,58 @@ namespace Valutaomregner
                 else
                 {
                     // Calculate non EURO exchange rates From A to B
-                    return (amount * toRate) / fromRate;
+                    return (fromRate / toRate) * amount;
                 }
             }
             catch { return GetCurrencyRateInEuro(to); }
         }*/
 
-        public static float CurrencyRate(string currency)
+        public static float GetRate(string currency)
         {
+            if (currency.ToLower() == "")
+                throw new ArgumentException("Invalid Argument! currency parameter cannot be empty!");
+            if (currency.ToLower() == "dkk")
+                throw new ArgumentException("Invalid Argument! Cannot get exchange rate from DKK to DKK");
 
+            try
+            {
+                // XML URL
+                string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
+                XmlTextReader reader = new XmlTextReader(xmlUrl);
+
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        if(reader.LocalName == "currency")
+                        {
+                            while (reader.MoveToNextAttribute())
+                            {
+                                if(reader.Name == currency)
+                                {
+                                    return float.Parse(reader.Value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // currency not parsed!! 
+                // return default value
+                return 1;
+            }
+
+            return 2;
         }
 
-        public static float ConvertValuta(string from, string to, float amount)
+        public static float ConvertValuta(string from, string to, float amount = 1)
         {
             // If input is missing
             if (from == null || to == null)
             {
-                return 0;
+                return 3;
             }
 
             // If currency is being converted to same currency
@@ -137,6 +173,24 @@ namespace Valutaomregner
                 return amount;
             }
 
+            try
+            {
+                float fromRate = GetRate(from);
+                float toRate = GetRate(to);
+
+                if (from == "dkk")
+                {
+                    return (amount * toRate);
+                } 
+                else if (to == "dkk")
+                {
+                    return (amount / fromRate);
+                } 
+                else
+                {
+                    return (fromRate / toRate) * amount;
+                }
+            } catch { return 4; }
         }
     }
 }
