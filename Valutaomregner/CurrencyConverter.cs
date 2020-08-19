@@ -10,36 +10,6 @@ namespace Valutaomregner
     public class CurrencyConverter
     {
 
-        /// Gets all available currency tags
-        public static string[] GetCurrencyTags()
-        {
-            string[] currencies = { "Vælg" };
-            int i = 0;
-
-            string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
-            XmlTextReader reader = new XmlTextReader(xmlUrl);
-
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Element)
-                {
-                    if (reader.LocalName == "currency")
-                    {
-                        while (reader.MoveToNextAttribute())
-                        {
-                            if (reader.Name == "code")
-                            {
-                                currencies[i++] = reader.Value;
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Hardcoded currency tags neccesairy to parse the ecb xml's
-            return currencies;
-        }
-
         /// <summary>
         /// Get currency exchange rate in euro's 
         /// </summary>
@@ -148,8 +118,21 @@ namespace Valutaomregner
 
             try
             {
-                // XML URL
+
                 string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlUrl);
+                XmlNodeList currencyList = doc.SelectNodes("exchangerates/dailyrates/currency/@rate");
+                foreach (XmlNode item in currencyList)
+                {
+                    if (item.Value == currency)
+                    {
+                        return float.Parse(item.Value);
+                    }
+                }
+
+                // XML URL
+                /*string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
                 XmlTextReader reader = new XmlTextReader(xmlUrl);
 
                 while (reader.Read())
@@ -174,7 +157,7 @@ namespace Valutaomregner
                             }
                         }
                     }
-                }
+                }*/
             }
             catch
             {
