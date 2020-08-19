@@ -14,10 +14,24 @@
         <Label Content="Til:" HorizontalAlignment="Left" Margin="530,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.057,-2.968"/>
         <Button x:Name="btn1" Click="btn1_Click" Content="Convert" HorizontalAlignment="Center" Height="30" Margin="0,292,0,0" VerticalAlignment="Top" Width="115"/>
         <ComboBox x:Name="Combo1" HorizontalAlignment="Left" Height="25" Margin="150,250,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>DKK</ComboBoxItem>
+            <ComboBoxItem>EUR</ComboBoxItem>
             <ComboBoxItem IsSelected="True">USD</ComboBoxItem>
+            <ComboBoxItem>GBP</ComboBoxItem>
+            <ComboBoxItem>SEK</ComboBoxItem>
+            <ComboBoxItem>NOK</ComboBoxItem>
+            <ComboBoxItem>CHF</ComboBoxItem>
+            <ComboBoxItem>JPY</ComboBoxItem>
         </ComboBox>
         <ComboBox x:Name="Combo2" HorizontalAlignment="Left" Height="25" Margin="530,250,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem IsSelected="True">EUR</ComboBoxItem>
+            <ComboBoxItem>DKK</ComboBoxItem>
+            <ComboBoxItem>EUR</ComboBoxItem>
+            <ComboBoxItem>USD</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">GBP</ComboBoxItem>
+            <ComboBoxItem>SEK</ComboBoxItem>
+            <ComboBoxItem>NOK</ComboBoxItem>
+            <ComboBoxItem>CHF</ComboBoxItem>
+            <ComboBoxItem>JPY</ComboBoxItem>
         </ComboBox>
         <Label Name="lbl1" Content="Beløb" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="120" Margin="530,215,0,0"/>
         <TextBox x:Name="txt1" HorizontalAlignment="Left" Margin="150,215,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25"/>

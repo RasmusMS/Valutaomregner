@@ -122,12 +122,12 @@ namespace Valutaomregner
                 string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
                 XmlDocument doc = new XmlDocument();
                 doc.Load(xmlUrl);
-                XmlNodeList currencyList = doc.SelectNodes("exchangerates/dailyrates/currency/@rate");
+                XmlNodeList currencyList = doc.SelectNodes("exchangerates/dailyrates/currency");
                 foreach (XmlNode item in currencyList)
                 {
-                    if (item.Value == currency)
+                    if (item.Attributes["code"].Value.ToString() == currency)
                     {
-                        return float.Parse(item.Value);
+                        return float.Parse(item.Attributes["rate"].Value);
                     }
                 }
 
@@ -185,31 +185,21 @@ namespace Valutaomregner
 
             try
             {
-                float fromRate = 0;
-                float toRate = 0;
+                float fromRate = 100;
+                float toRate = 100;
 
-                if (from != "dkk")
+                if (from.ToLower() != "dkk")
                 {
                     fromRate = GetRate(from);
                 }
 
-                if (to != "dkk")
+                if (to.ToLower() != "dkk")
                 {
                     toRate = GetRate(to);
                 }
 
-                if (from == "dkk")
-                {
-                    return (amount * toRate);
-                } 
-                else if (to == "dkk")
-                {
-                    return (amount / fromRate);
-                } 
-                else
-                {
-                    return fromRate;
-                }
+                return (fromRate / toRate) * amount;
+
             } catch { return 4; }
         }
     }
