@@ -13,11 +13,31 @@ namespace Valutaomregner
         /// Gets all available currency tags
         public static string[] GetCurrencyTags()
         {
+            string[] currencies = { "Vælg" };
+            int i = 0;
+
+            string xmlUrl = "https://www.nationalbanken.dk/_vti_bin/DN/DataService.svc/CurrencyRatesXML?lang=da";
+            XmlTextReader reader = new XmlTextReader(xmlUrl);
+
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (reader.LocalName == "currency")
+                    {
+                        while (reader.MoveToNextAttribute())
+                        {
+                            if (reader.Name == "code")
+                            {
+                                currencies[i++] = reader.Value;
+                            }
+                        }
+                    }
+                }
+            }
 
             // Hardcoded currency tags neccesairy to parse the ecb xml's
-            return new string[] {"eur", "usd", "jpy", "bgn", "czk", "dkk", "gbp", "huf", "ltl", "lvl"
-            , "pln", "ron", "sek", "chf", "nok", "hrk", "rub", "try", "aud", "brl", "cad", "cny", "hkd", "idr", "ils"
-            , "inr", "krw", "mxn", "myr", "nzd", "php", "sgd", "zar"};
+            return currencies;
         }
 
         /// <summary>
@@ -140,9 +160,16 @@ namespace Valutaomregner
                         {
                             while (reader.MoveToNextAttribute())
                             {
-                                if(reader.Name == currency)
+                                if (reader.Value == currency)
                                 {
-                                    return float.Parse(reader.Value);
+                                    if (reader.Name == "rate")
+                                    {
+                                        return float.Parse(reader.Value);
+                                    }
+                                    else
+                                    {
+                                        return 101;
+                                    }
                                 }
                             }
                         }
@@ -175,8 +202,18 @@ namespace Valutaomregner
 
             try
             {
-                float fromRate = GetRate(from);
-                float toRate = GetRate(to);
+                float fromRate = 0;
+                float toRate = 0;
+
+                if (from != "dkk")
+                {
+                    fromRate = GetRate(from);
+                }
+
+                if (to != "dkk")
+                {
+                    toRate = GetRate(to);
+                }
 
                 if (from == "dkk")
                 {
@@ -188,7 +225,7 @@ namespace Valutaomregner
                 } 
                 else
                 {
-                    return (fromRate / toRate) * amount;
+                    return fromRate;
                 }
             } catch { return 4; }
         }
